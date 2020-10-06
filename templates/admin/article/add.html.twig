@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Nouvel Article
+{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un article</h1>
+
+    {# On iclue le formulaire des aticles #}
+    {% include 'admin/article/_article_form.html.twig' %}
+{% endblock %}
+
+
