@@ -9,6 +9,10 @@
     </head>
 
     <body>
+    {# on affiche le menu de back office uniquement aux utilisateurs
+        dispisant du ROLE_ADMIN
+    #}
+    {% if is_granted('ROLE_ADMIN') %}
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
@@ -29,6 +33,8 @@
             </div>
         </nav>
 
+    {% endif %}
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
                 {#
@@ -41,9 +47,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAdmin">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="{{ path('app_login') }}">
-                            Connexion
-                        </a>
+                        {% if is_granted('ROLE_USER') %}
+                            <a class="nav-link" href="">
+                                {{ app.user.username }}
+                            </a>
+                            <a class="nav-link" href="{{ path('app_logout') }}">
+                                Déconnexion
+                            </a>
+                        {% else %}
+                            <a class="nav-link" href="{{ path('app_login') }}">
+                                Connexion
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
